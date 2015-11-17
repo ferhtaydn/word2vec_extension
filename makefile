@@ -19,3 +19,4 @@ distance_files : distance_files.c
 	chmod +x *.sh
 clean:
 	rm -rf word2vec word2phrase distance word-analogy compute-accuracy distance_files
+	chmod -x *.sh
