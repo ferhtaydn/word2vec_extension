@@ -135,7 +135,6 @@ int main(int argc, char **argv) {
       bi[a] = b;
       if (b == -1) {
         printf("Out of dictionary word: %s \n", st[0]);
-        return 0;
       }
     }
 
@@ -188,8 +187,12 @@ int main(int argc, char **argv) {
       }
     }
 
-    outFile = fopen(strcat(dir_under, strcat(st1, ".txt")), "w");
-    for (a = 0; a < N; a++) fprintf(outFile, "%s,%f\n", bestw[a], bestd[a]);
+    // do not create the files with complete -1 results (out of dict).
+    for (a = 0; a < N; a++) if (bestd[a] != -1) break;
+    if (a < N) {  
+      outFile = fopen(strcat(dir_under, strcat(st1, ".txt")), "w");
+      for (a = 0; a < N; a++) fprintf(outFile, "%s,%f\n", bestw[a], bestd[a]);
+    }
   }
   return 0;
 }
